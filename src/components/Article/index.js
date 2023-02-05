@@ -11,6 +11,11 @@ function zeroPad(value, len) {
 function getParametersForUnsplash({width, height, quality, format}) {
   return `?w=${width}&h=${height}&q=${quality}&fm=${format}&fit=crop`
 }
+// 실제 디스플레이는 120*120, 그러나 사용하는 이미지 사이즈는 1200*1200이기에 문제.
+// 120*120을 사용할 수 있지만, 요즘 레티나 디스플레이는 같은 공간에 더 많은 픽셀을 그릴 수 있기에, 너비 기준 두 배 정도 큰 이미지 사용이 적절.(240*240).
+
+
+// 자신의 서버(사진 편집툴 사용)가 아닌 외부 API를 이용해 이미지를 받아올 경우, Cloudinary, Imgix같은 이미지 CDN사용 가능
 
 /*
  * 파라미터로 넘어온 문자열에서 일부 특수문자를 제거하는 함수
@@ -52,7 +57,7 @@ function Article(props) {
         </div>
       </div>
       <div className={'Article__thumbnail'}>
-        <img src={props.image + getParametersForUnsplash({width: 1200, height: 1200, quality: 80, format: 'jpg'})} alt="thumbnail" />
+        <img src={props.image + getParametersForUnsplash({width: 240, height: 240, quality: 80, format: 'jpg'})} alt="thumbnail" />
       </div>
     </div>
   )
